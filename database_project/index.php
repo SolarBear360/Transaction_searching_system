@@ -3,7 +3,6 @@
 // 使用 PHP 陣列來定義菜單的層次和相應的檔案名。
 $menu_items = [
     'User' => [
-        'buying'    => 'user_buying.php',
         'add'       => 'user_add.php',
         'money'     => 'user_money.php',
         'add_money' => 'user_add_money.php',
@@ -63,7 +62,7 @@ function generate_menu_html(array $items): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Hierarchy Menu 範例</title>
+    <title>交易查詢系統</title>
     <style>
         .menu-container {
             font-family: Arial, sans-serif;
