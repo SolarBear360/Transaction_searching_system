@@ -114,7 +114,7 @@ $menu_items = [
 
     <div class="logo-container">
         <!-- 這是您放 Logo 的地方。請將 src 替換成您的 Logo 圖片路徑 -->
-        <img src="src/logo.png" alt="Logo" style="height: 120px;">
+        <img src="src/logo.png" alt="Logo" style="height: 100px;">
     </div>
     <div class="main-container">
         <div class="nav-container">
