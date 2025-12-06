@@ -3,19 +3,11 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The style for the back button has been removed as it's no longer needed. -->
 
     </head>
 <?php 
-//------------------------------    用本地端的帳密
-    $db_host = 'localhost';
-    $username = 'root';
-    $password = 'noisy';
-    $db_name = 'transaction_system';
-//------------------------------
-    $conn = new mysqli($db_host, $username, $password, $db_name);
-    if (!empty($conn->connect_error)) {
-        die('資料庫連線錯誤:' . $conn->connect_error);
-    }
+    include_once '../db_conn.php';
 ?>
 <!-- 新增交易  -->
 <body>
@@ -25,7 +17,7 @@
         訂單數量 : <input type='text' name='quantity' value=1 required> <br>
         <button type="submit">新增</button>
     </form>
-
+    <button onclick="window.location.href='../index.php'">返回</button>
 <?php 
     if(isset($_POST['user_ID']) && isset($_POST['item_ID']) && $_POST['quantity'] > 0){
         $query = ("INSERT INTO transactions values(null,?,?,?)");

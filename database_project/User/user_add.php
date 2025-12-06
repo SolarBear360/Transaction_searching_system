@@ -6,16 +6,7 @@
 
     </head>
 <?php 
-//------------------------------    用本地端的帳密
-    $db_host = 'localhost';
-    $username = 'root';
-    $password = 'noisy';
-    $db_name = 'transaction_system';
-//------------------------------
-    $conn = new mysqli($db_host, $username, $password, $db_name);
-    if (!empty($conn->connect_error)) {
-        die('資料庫連線錯誤:' . $conn->connect_error);
-    }
+    include_once '../db_conn.php';
 ?>
 <!-- 新增使用者  -->
 <body>
@@ -24,6 +15,7 @@
         電話 : <input type='text' name='user_phone' required> <br>
         <button type="submit">新增</button>
     </form>
+        <button onclick="window.location.href='../index.php'">返回</button>
 
 <?php 
     if(isset($_POST['user_name']) && isset($_POST['user_phone'])){

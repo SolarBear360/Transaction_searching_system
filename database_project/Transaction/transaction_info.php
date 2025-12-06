@@ -6,16 +6,7 @@
 
     </head>
 <?php 
-//------------------------------    用本地端的帳密
-    $db_host = 'localhost';
-    $username = 'root';
-    $password = 'noisy';
-    $db_name = 'transaction_system';
-//------------------------------
-    $conn = new mysqli($db_host, $username, $password, $db_name);
-    if (!empty($conn->connect_error)) {
-        die('資料庫連線錯誤:' . $conn->connect_error);
-    }
+    include_once '../db_conn.php';
 
     function query_result($stm){
         $transaction_ID = 0;
@@ -63,6 +54,7 @@
         商品 : <input type='text' name='item_name'> <br>
         <button type="submit">查詢</button>
     </form>
+    <button onclick="window.location.href='../index.php'">返回</button>
 
 <?php 
     if(isset($_POST['buyer_ID'])){

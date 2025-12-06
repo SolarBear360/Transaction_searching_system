@@ -6,16 +6,7 @@
 
     </head>
 <?php 
-//------------------------------    用本地端的帳密
-    $db_host = 'localhost';
-    $username = 'root';
-    $password = 'noisy';
-    $db_name = 'transaction_system';
-//------------------------------
-    $conn = new mysqli($db_host, $username, $password, $db_name);
-    if (!empty($conn->connect_error)) {
-        die('資料庫連線錯誤:' . $conn->connect_error);
-    }
+    include_once '../db_conn.php';
 
     function query_result($stm){  //輸出成html表格
         $ID = 0;
@@ -51,7 +42,7 @@
         ID : <input type='text' name='user_ID'> <br>
         <button type="submit">查詢</button>
     </form>
-
+    <button onclick="window.location.href='../index.php'">返回</button>
 <?php 
 
 
