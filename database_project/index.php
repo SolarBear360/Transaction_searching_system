@@ -1,22 +1,22 @@
 <?php
 // 定義菜單結構
 $menu_items = [
-    'User' => [
-        'add' => 'user_add.php',
-        'money' => 'user_money.php',
-        'add_money' => 'user_add_money.php',
-        'info' => 'user_info.php',
+    '使用者資訊' => [
+        '新增使用者' => 'user_add.php',
+        '結算剩餘金額' => 'user_money.php',
+        '儲值' => 'user_add_money.php',
+        '查詢使用者資訊' => 'user_info.php',
     ],
-    'Transaction' => [
-        'create' => 'transaction_create.php',
-        'cancel' => 'transaction_cancel.php',
-        'info' => 'transaction_info.php',
+    '交易資訊' => [
+        '新增交易' => 'transaction_create.php',
+        '取消交易' => 'transaction_cancel.php',
+        '交易資訊查詢' => 'transaction_info.php',
     ],
-    'Item' => [
-        'add' => 'item_add.php',
-        'remain' => 'item_remain.php',
-        'edit' => 'item_edit.php',
-        'info' => 'item_info.php',
+    '商品資訊' => [
+        '新增商品' => 'item_add.php',
+        '結算剩餘商品' => 'item_remain.php',
+        '修改商品資訊' => 'item_edit.php',
+        '查詢商品資訊' => 'item_info.php',
     ]
 ];
 ?>

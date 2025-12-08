@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+<?php 
+    include_once '../db_conn.php';
+
+    function query_result($stm){
+        $transaction_ID = 0;
+        $buyer_ID = 0;
+        $item_ID = 0;
+        $transaction_count = 0;
+        $seller_ID = 0;
+        $item_name = "";
+        $item_price = 0;
+        $item_remain = 0;
+        $stm->bind_result($transaction_ID,$buyer_ID,$item_ID,$transaction_count,$item_ID,$seller_ID,$item_name,$item_price,$item_remain);
+        echo "<table border='1'>
+        <tr>
+            <th>買家ID</th>
+            <th>商品ID</th>
+            <th>商品名稱</th>
+            <th>商品數量</th>
+            <th>總價</th>
+            <th>訂單數量</th>
+        </tr>
+    ";
+        while($stm->fetch()){
+            echo "<tr>";
+            echo "<td>".$buyer_ID."</td>";
+            echo "<td>".$item_ID."</td>";
+            echo "<td>".$item_name."</td>";
+            echo "<td>".$item_remain."</td>";
+            echo "<td>".$item_price."</td>";
+            echo "<td>".$transaction_count."</td>";
+            echo "</tr>";
+        }
+    }
+?>
+<!-- 查詢交易  -->
+<body>
+    <form method="POST" action="transaction_info.php">
+        買方ID : <input type='text' name='buyer_ID'> <br>
+        <button type="submit">查詢</button>
+    </form>
+    <form method="POST" action="transaction_info.php">
+        賣方ID : <input type='text' name='seller_ID'> <br>
+        <button type="submit">查詢</button>
+    </form>
+    <form method="POST" action="transaction_info.php">
+        商品 : <input type='text' name='item_name'> <br>
+        <button type="submit">查詢</button>
+    </form>
+    <button onclick="window.location.href='../index.php'">返回</button>
+
+<?php 
+    if(isset($_POST['buyer_ID'])){
+        // $query = ("SELECT * FROM transactions,item JOIN item ON item.item_ID = transactions.item_ID WHERE transactions.user_ID = ? ");
+        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and transactions.user_ID = ? ");
+        $stmt = $conn->prepare(($query));
+        $stmt->execute(array($_POST['buyer_ID']));
+        query_result(($stmt));
+    }else if(isset($_POST['seller_ID'])){
+        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and item.user_ID = ? ");
+        $stmt = $conn->prepare(($query));
+        $stmt->execute(array($_POST['seller_ID']));
+        query_result(($stmt));
+    }else if(isset($_POST['item_name'])){
+        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and item.item_name = ? ");
+        $stmt = $conn->prepare(($query));
+        $stmt->execute(array($_POST['item_name']));
+        query_result(($stmt));
+    }
+
+
+?>
+</body>
+</html>
