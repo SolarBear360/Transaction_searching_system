@@ -1,0 +1,30 @@
+/* procedure 查詢特定使用者的所有交易
+    create procedure user_trans(in buyer_name varchar(30))
+    begin
+    SELECT user_name, users.user_ID, item_name, item_price, quantity
+    FROM transactions, item, users 
+    WHERE item.item_ID = transactions.item_ID and users.userID = transactions.user_ID and users.user_name = buyer_name;
+    end
+*/
+
+/* function 查詢特定商品名的平均價格
+    create function avg_price(labl varchar(30))
+    returns decimal(10,2)
+    begin
+    declare avg_p decimal(10,2);
+    SELECT sum(item_price*remain) / sum(remain) into avg_p
+    FROM item
+    WHERE item.item_name = labl;
+    return avg_p;
+    end
+*/
+
+/* trigger : 儲值 1000 元以上，多送10%
+    create trigger discount before update on users
+    -> for each row
+    -> begin
+    -> if NEW.money > 999 then
+    -> set NEW.money = NEW.money*1.1;
+    -> end if;
+    -> end //
+*/
