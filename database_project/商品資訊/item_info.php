@@ -3,7 +3,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
@@ -39,6 +39,7 @@
 ?>
 <!-- 查詢商品資訊 !-->
 <body>
+    <div class="main-container">
     <form method="POST" action="item_info.php">
         商品名稱 : <input type='text' name='item_name'> <br>
         <button type="submit">查詢</button>
@@ -51,12 +52,12 @@
 
 <?php 
     if(isset($_POST['item_name'])){
-        $query = ("SELECT * from item WHERE item_name = ?");
+        $query = ("SELECT * from items WHERE item_name = ?");
         $stmt = $conn->prepare(($query));
         $stmt->execute(array($_POST['item_name']));
         query_result($stmt);
     }else if(isset($_POST['item_ID'])){
-        $query = ("SELECT * from item WHERE item_ID = ?");
+        $query = ("SELECT * from items WHERE item_ID = ?");
         $stmt = $conn->prepare(($query));
         $stmt->execute(array($_POST['item_ID']));
         query_result($stmt);
@@ -64,5 +65,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>

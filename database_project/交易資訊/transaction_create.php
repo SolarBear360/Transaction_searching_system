@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- The style for the back button has been removed as it's no longer needed. -->
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
 ?>
 <!-- 新增交易  -->
 <body>
+    <div class="main-container">
     <form method="POST" action="transaction_create.php">
         買方ID : <input type='text' name='user_ID' required> <br>
         商品ID : <input type='text' name='item_ID' required> <br>
@@ -27,5 +28,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>

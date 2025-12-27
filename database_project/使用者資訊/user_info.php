@@ -3,7 +3,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
@@ -34,6 +34,7 @@
 ?>
 <!-- 查詢使用者資訊 !-->
 <body>
+    <div class="main-container">
     <form method="POST" action="user_info.php">
         姓名 : <input type='text' name='user_name'> <br>
         <button type="submit">查詢</button>
@@ -61,5 +62,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>

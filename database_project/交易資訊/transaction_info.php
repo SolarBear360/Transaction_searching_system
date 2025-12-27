@@ -3,7 +3,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
@@ -42,6 +42,7 @@
 ?>
 <!-- 查詢交易  -->
 <body>
+    <div class="main-container">
     <form method="POST" action="transaction_info.php">
         買方ID : <input type='text' name='buyer_ID'> <br>
         <button type="submit">查詢</button>
@@ -58,18 +59,18 @@
 
 <?php 
     if(isset($_POST['buyer_ID'])){
-        // $query = ("SELECT * FROM transactions,item JOIN item ON item.item_ID = transactions.item_ID WHERE transactions.user_ID = ? ");
-        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and transactions.user_ID = ? ");
+        // $query = ("SELECT * FROM transactions,items JOIN items ON items.item_ID = transactions.item_ID WHERE transactions.user_ID = ? ");
+        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and transactions.user_ID = ? ");
         $stmt = $conn->prepare(($query));
         $stmt->execute(array($_POST['buyer_ID']));
         query_result(($stmt));
     }else if(isset($_POST['seller_ID'])){
-        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and item.user_ID = ? ");
+        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.user_ID = ? ");
         $stmt = $conn->prepare(($query));
         $stmt->execute(array($_POST['seller_ID']));
         query_result(($stmt));
     }else if(isset($_POST['item_name'])){
-        $query = ("SELECT * FROM transactions, item WHERE item.item_ID = transactions.item_ID and item.item_name = ? ");
+        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.item_name = ? ");
         $stmt = $conn->prepare(($query));
         $stmt->execute(array($_POST['item_name']));
         query_result(($stmt));
@@ -77,5 +78,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>

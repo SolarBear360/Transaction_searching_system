@@ -3,13 +3,14 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
 ?>
 <!-- 使用者儲值 !-->
 <body>
+    <div class="main-container">
     <form method="POST" action="user_add_money.php">
         ID : <input type='text' name='user_ID' required> <br>
         金額 : <input type='text' name='money' required> <br>
@@ -27,5 +28,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>

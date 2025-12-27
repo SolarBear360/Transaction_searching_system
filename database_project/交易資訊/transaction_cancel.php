@@ -3,13 +3,14 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../common.css">
     </head>
 <?php 
     include_once '../db_conn.php';
 ?>
 <!-- 刪除交易  -->
 <body>
+    <div class="main-container">
     <form method="POST" action="transaction_cancel.php">
         交易ID : <input type='text' name='transaction_ID' required> <br>
         <button type="submit">取消交易</button>
@@ -26,5 +27,6 @@
 
 
 ?>
+    </div>
 </body>
 </html>
