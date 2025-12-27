@@ -58,22 +58,26 @@
     <button onclick="window.location.href='../index.php'">返回</button>
 
 <?php 
-    if(isset($_POST['buyer_ID'])){
-        // $query = ("SELECT * FROM transactions,items JOIN items ON items.item_ID = transactions.item_ID WHERE transactions.user_ID = ? ");
-        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and transactions.user_ID = ? ");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['buyer_ID']));
-        query_result(($stmt));
-    }else if(isset($_POST['seller_ID'])){
-        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.user_ID = ? ");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['seller_ID']));
-        query_result(($stmt));
-    }else if(isset($_POST['item_name'])){
-        $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.item_name = ? ");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['item_name']));
-        query_result(($stmt));
+    try {
+        if(isset($_POST['buyer_ID'])){
+            // $query = ("SELECT * FROM transactions,items JOIN items ON items.item_ID = transactions.item_ID WHERE transactions.user_ID = ? ");
+            $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and transactions.user_ID = ? ");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['buyer_ID']));
+            query_result(($stmt));
+        }else if(isset($_POST['seller_ID'])){
+            $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.user_ID = ? ");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['seller_ID']));
+            query_result(($stmt));
+        }else if(isset($_POST['item_name'])){
+            $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.item_name = ? ");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['item_name']));
+            query_result(($stmt));
+        }
+    } catch (Exception $e) {
+        echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
     }
 
 

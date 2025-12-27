@@ -2,8 +2,8 @@
     create procedure user_trans(in buyer_name varchar(30))
     begin
     SELECT user_name, users.user_ID, item_name, item_price, quantity
-    FROM transactions, item, users 
-    WHERE item.item_ID = transactions.item_ID and users.userID = transactions.user_ID and users.user_name = buyer_name;
+    FROM transactions, items, users 
+    WHERE items.item_ID = transactions.item_ID and users.userID = transactions.user_ID and users.user_name = buyer_name;
     end
 */
 
@@ -13,8 +13,8 @@
     begin
     declare avg_p decimal(10,2);
     SELECT sum(item_price*remain) / sum(remain) into avg_p
-    FROM item
-    WHERE item.item_name = labl;
+    FROM items
+    WHERE items.item_name = labl;
     return avg_p;
     end
 */

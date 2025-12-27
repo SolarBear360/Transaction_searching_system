@@ -1,5 +1,6 @@
 <?php 
 //------------------------------    用本地端的帳密
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $db_host = 'localhost';
     $username = 'root';
     $password = '';

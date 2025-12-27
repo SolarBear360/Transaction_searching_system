@@ -22,10 +22,14 @@
 
 <?php 
     if(isset($_POST['user_ID']) && isset($_POST['item_name']) && isset($_POST['item_price']) && isset($_POST['item_remain'])){
-        $query = ("INSERT INTO items values(null,?,?,?,?)");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['user_ID'],$_POST['item_name'],$_POST['item_price'],$_POST['item_remain']));
-        echo $stmt->error;
+        try {
+            $query = ("INSERT INTO items values(null,?,?,?,?)");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['user_ID'],$_POST['item_name'],$_POST['item_price'],$_POST['item_remain']));
+            echo $stmt->error;
+        } catch (Exception $e) {
+            echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
+        }
     }
 
 

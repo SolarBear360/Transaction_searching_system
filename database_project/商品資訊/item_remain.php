@@ -19,27 +19,29 @@
 
 <?php 
     if(isset($_POST['item_ID'])){
-        $query = ("SELECT items.item_ID, item_name, remain-COALESCE(sum(quantity),0) as remain_number   
-                    FROM items LEFT OUTER JOIN transactions USING(item_ID)
-                    WHERE items.item_ID = ? 
-                    GROUP BY items.item_ID, items.user_ID, items.item_name, items.item_price, items.remain");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['item_ID']));
-        $stmt->bind_result($ID,$name,$remain);
+        try {
+            $query = ("SELECT items.item_ID, item_name, remain-sum(quantity) 
+                        FROM items, transactions WHERE items.item_ID = transactions.item_ID and items.item_ID = ? 
+                        GROUP BY items.item_ID, items.user_ID, items.item_name, items.item_price, items.remain");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['item_ID']));
+            $stmt->bind_result($ID,$name,$remain);
 
-        echo "<table border=1><tr>
-            <th>ID</th>
-            <th>商品</th>
-            <th>剩餘</th>
-        </tr>";
-        while($stmt->fetch()){
-            echo "<tr>
-                <td>$ID</td>
-                <td>$name</td>
-                <td>$remain</td>
+            echo "<table border=1><tr>
+                <th>ID</th>
+                <th>商品</th>
+                <th>剩餘</th>
             </tr>";
+            while($stmt->fetch()){
+                echo "<tr>
+                    <td>$ID</td>
+                    <td>$name</td>
+                    <td>$remain</td>
+                </tr>";
+            }
+        } catch (Exception $e) {
+            echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
         }
-
     }
 
 

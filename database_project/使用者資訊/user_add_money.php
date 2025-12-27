@@ -21,9 +21,13 @@
 <?php 
     //若輸入金額 > 0 則增加持有金額
     if(isset($_POST['user_ID']) && isset($_POST['money']) && $_POST['money'] > 0){
-        $query = ("UPDATE users set money = money + ? WHERE user_ID = ?");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['money'],$_POST['user_ID']));
+        try {
+            $query = ("UPDATE users set money = money + ? WHERE user_ID = ?");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['money'],$_POST['user_ID']));
+        } catch (Exception $e) {
+            echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
+        }
     }
 
 

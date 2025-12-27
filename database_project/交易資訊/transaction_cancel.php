@@ -19,10 +19,13 @@
 
 <?php 
     if(isset($_POST['transaction_ID'])){
-        $query = ("DELETE FROM transactions WHERE trans_ID = ?");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['transaction_ID']));
-
+        try {
+            $query = ("DELETE FROM transactions WHERE trans_ID = ?");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['transaction_ID']));
+        } catch (Exception $e) {
+            echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
+        }
     }
 
 

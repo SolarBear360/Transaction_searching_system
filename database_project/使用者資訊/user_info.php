@@ -47,16 +47,20 @@
 <?php 
 
 
-    if(isset($_POST['user_name'])){
-        $query = ("SELECT * from users WHERE user_name = ?");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['user_name']));
-        query_result(($stmt));
-    }else if(isset($_POST['user_ID'])){
-        $query = ("SELECT * from users WHERE user_ID = ?");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['user_ID']));
-        query_result(($stmt));
+    try {
+        if(isset($_POST['user_name'])){
+            $query = ("SELECT * from users WHERE user_name = ?");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['user_name']));
+            query_result(($stmt));
+        }else if(isset($_POST['user_ID'])){
+            $query = ("SELECT * from users WHERE user_ID = ?");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['user_ID']));
+            query_result(($stmt));
+        }
+    } catch (Exception $e) {
+        echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
     }
 
 

@@ -21,9 +21,14 @@
     <button onclick="window.location.href='../index.php'">返回</button>
 <?php 
     if(isset($_POST['user_ID']) && isset($_POST['item_ID']) && $_POST['quantity'] > 0){
-        $query = ("INSERT INTO transactions values(null,?,?,?)");
-        $stmt = $conn->prepare(($query));
-        $stmt->execute(array($_POST['user_ID'],$_POST['item_ID'],$_POST['quantity']));
+        try {
+            $query = ("INSERT INTO transactions values(null,?,?,?)");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['user_ID'],$_POST['item_ID'],$_POST['quantity']));
+            echo $stmt->error;
+        } catch (Exception $e) {
+            echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
+        }
     }
 
 
