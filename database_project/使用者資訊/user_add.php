@@ -24,7 +24,6 @@
             $query = ("INSERT INTO users values(null,?,0,?)");
             $stmt = $conn->prepare(($query));
             $stmt->execute(array($_POST['user_name'],$_POST['user_phone']));
-            echo "有沒有bug".$stmt->error;
         } catch (Exception $e) {
             echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
         }

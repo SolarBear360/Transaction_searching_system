@@ -59,6 +59,7 @@
             $stmt->execute(array($_POST['user_ID']));
             query_result(($stmt));
         }
+        
     } catch (Exception $e) {
         echo '<div class="error-message">錯誤訊息: ' . $e->getMessage() . '</div>';
     }

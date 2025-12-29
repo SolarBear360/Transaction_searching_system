@@ -3,7 +3,7 @@
     begin
     SELECT user_name, users.user_ID, item_name, item_price, quantity
     FROM transactions, items, users 
-    WHERE items.item_ID = transactions.item_ID and users.userID = transactions.user_ID and users.user_name = buyer_name;
+    WHERE items.item_ID = transactions.item_ID and users.user_ID = transactions.user_ID and users.user_name = buyer_name;
     end
 */
 

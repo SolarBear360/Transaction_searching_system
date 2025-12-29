@@ -39,12 +39,43 @@
             echo "</tr>";
         }
     }
+    function user_name_query_result($stm){
+        $buyer_name = "";
+        $buyer_ID = 0;
+        $transaction_count = 0;
+        $item_name = "";
+        $item_price = 0;
+        $stm->bind_result($buyer_name,$buyer_ID,$item_name,$item_price,$transaction_count);
+
+        echo "<table border='1'>
+        <tr>
+            <th>買家</th>
+            <th>買家ID</th>
+            <th>商品名稱</th>
+            <th>價格</th>
+            <th>訂單數量</th>
+        </tr>
+    ";
+        while($stm->fetch()){
+            echo "<tr>";
+            echo "<td>".$buyer_name."</td>";
+            echo "<td>".$buyer_ID."</td>";
+            echo "<td>".$item_name."</td>";
+            echo "<td>".$item_price."</td>";
+            echo "<td>".$transaction_count."</td>";
+            echo "</tr>";
+        }
+    }
 ?>
 <!-- 查詢交易  -->
 <body>
     <div class="main-container">
     <form method="POST" action="transaction_info.php">
         買方ID : <input type='text' name='buyer_ID'> <br>
+        <button type="submit">查詢</button>
+    </form>
+    <form method="POST" action="transaction_info.php">
+        使用者名稱 : <input type='text' name='user_name'> <br>
         <button type="submit">查詢</button>
     </form>
     <form method="POST" action="transaction_info.php">
@@ -70,6 +101,11 @@
             $stmt = $conn->prepare(($query));
             $stmt->execute(array($_POST['seller_ID']));
             query_result(($stmt));
+        }else if(isset($_POST['user_name'])){
+            $query = ("call user_trans(?)");
+            $stmt = $conn->prepare(($query));
+            $stmt->execute(array($_POST['user_name']));
+            user_name_query_result(($stmt));
         }else if(isset($_POST['item_name'])){
             $query = ("SELECT * FROM transactions, items WHERE items.item_ID = transactions.item_ID and items.item_name = ? ");
             $stmt = $conn->prepare(($query));

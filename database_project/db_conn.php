@@ -3,7 +3,7 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $db_host = 'localhost';
     $username = 'root';
-    $password = '';
+    $password = 'Sean34145556';
     $db_name = 'transaction_system';
 //------------------------------
     $conn = new mysqli($db_host, $username, $password, $db_name);
